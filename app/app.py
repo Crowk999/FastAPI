@@ -48,3 +48,10 @@ def add_student(student_id:int, student:Student):
         raise HTTPException(status_code=409, detail="Its already stored")
     students[student_id] = student
     return students[student_id]
+
+@app.delete("/delete_student/{student_id}")
+def del_student(student_id:int):
+    if student_id not in students:
+        raise HTTPException(status_code=400, detail="There is no id")
+    students.pop(student_id)
+    return{"detail": "sucess"}
